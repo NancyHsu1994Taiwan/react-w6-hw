@@ -1,10 +1,13 @@
 import { Modal } from "bootstrap";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import ProductModal from "../components/ProductModal";
-import Pagination from "../components/Pagination";
-import Loading from "../components/Loading";
+import ProductModal from "../../components/ProductModal";
+import Pagination from "../../components/Pagination";
+import Loading from "../../components/Loading";
+import MessageToast from "../../components/MessageToast";
 
+import { useDispatch } from "react-redux";
+import { createAsyncMessage } from "../../slice/messageSlice";
 function Products() {
   const { VITE_BASE_URL: BASE_URL, VITE_API_BASE: API_BASE } = import.meta.env;
 
@@ -12,13 +15,13 @@ function Products() {
   const [tempProduct, setTempProduct] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [loadingState, setLoadingState] = useState(false);
+  const dispatch = useDispatch();
   const getProducts = async (page = 1) => {
     try {
       setLoadingState(true);
       const res = await axios.get(
         `${BASE_URL}/api/${API_BASE}/products?page=${page}`
       );
-      console.log(res);
       const page_info = res.data.pagination;
       setProducts(res.data.products);
       setPageInfo(page_info);
@@ -51,14 +54,16 @@ function Products() {
           qty: qty,
         },
       });
-      alert(res.data.message);
+
+      dispatch(createAsyncMessage(res.data));
     } catch (error) {
-      alert("加入購物車失敗", error.message);
+      dispatch(createAsyncMessage(error.response.data));
     }
   };
   return (
     <>
       <h1>Products</h1>
+      <MessageToast />
       <table className="table align-middle">
         <thead>
           <tr>

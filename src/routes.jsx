@@ -1,14 +1,14 @@
-import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Carts from "./pages/Carts";
-import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
-import AdminLayout from "./pages/AdminLayout";
-import AdminProducts from "./pages/AdminProducts";
-import AdminOrder from "./pages/AdminOrder";
+import Home from "./pages/front/Home.jsx";
+import Products from "./pages/front/Products";
+import Carts from "./pages/front/Carts";
+import Login from "./pages/front/Login.jsx";
+import NotFound from "./pages/front/NotFound.jsx";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminProducts from "./pages/admin/AdminProducts";
+import AdminOrder from "./pages/admin/AdminOrder.jsx";
 import App from "./App.jsx";
 
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 const routes = [
   {
     path: "/",
@@ -52,5 +52,5 @@ const routes = [
   },
 ];
 
-const router = createBrowserRouter(routes);
+const router = createHashRouter(routes);
 export default router;

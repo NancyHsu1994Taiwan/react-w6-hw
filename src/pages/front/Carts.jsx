@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Form from "../components/Form";
-import Loading from "../components/Loading";
+import Form from "../../components/Form";
+import Loading from "../../components/Loading";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_BASE;
